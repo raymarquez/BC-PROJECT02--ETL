@@ -1,0 +1,52 @@
+DROP TABLE IF EXISTS Basketball_data;
+----creating a table with 29 columns to import the data in it-----
+CREATE TABLE Basketball_data (
+    Team VARCHAR   NOT NULL,
+    Player VARCHAR   NOT NULL,
+    Allstars boolean   NOT NULL,
+    College VARCHAR   NOT NULL,
+    Play_Yrs INT   NOT NULL,
+    Games INT   NOT NULL,
+    Year INT   NOT NULL,
+    Pick INT   NOT NULL,
+    Play_ID VARCHAR   NOT NULL,
+    Season_ID INT   NOT NULL,
+    Conference VARCHAR   NOT NULL,
+    League_ID VARCHAR   NOT NULL,
+    Games_Played INT   NOT NULL,
+    Minutes INT   NOT NULL,
+    Points INT   NOT NULL,
+    O_Rebounds INT   NOT NULL,
+    D_Rebounds INT   NOT NULL,
+    Rebounds INT   NOT NULL,
+    Assists INT   NOT NULL,
+    Steals INT   NOT NULL,
+    Blocks INT   NOT NULL,
+    Turnovers INT   NOT NULL,
+    Personal_Fouls INT   NOT NULL,
+    FG_Attempted INT   NOT NULL,
+    FG_Made INT   NOT NULL,
+    FT_Attempted INT   NOT NULL,
+    FT_Made INT   NOT NULL,
+    Three_Attempted INT   NOT NULL,
+    Three_Made INT   NOT NULL
+);
+---SQL QUERRIES STATEMENTS----
+---this statement selects the Allstars players---
+SELECT player FROM Basketball_data
+  WHERE allstars IN('True');
+
+
+--- this seconds statements will show the allstars players----
+SELECT player FROM Basketball_data
+WHERE allstars NOT IN('True');
+
+------  the third statement sort the players prevelant to become allstars----- 
+
+
+SELECT   Basketball_data.pick, COUNT(pick) AS "Draft_Pick_Count", Basketball_data.allstars, 
+Basketball_data.player
+FROM Basketball_data
+WHERE allstars=True
+group by Basketball_data.pick, Basketball_data.allstars,Basketball_data.player
+ORDER BY "Draft_Pick_Count" DESC;
